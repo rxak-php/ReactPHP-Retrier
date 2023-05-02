@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Exan\Retrier;
 
 use Exan\Retrier\Exceptions\TooManyRetriesException;
