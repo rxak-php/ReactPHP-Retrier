@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is running code quality assurance
 on:
   pull_request:
   push:
-    branches: master
+    branches: main
 
 jobs:
   cs:
