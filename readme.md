@@ -21,7 +21,6 @@ $result->then(function ($res) {
 ```
 
 # Supported PHP versions
-- 8.0
 - 8.1
 - 8.2
 - 8.3
