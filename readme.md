@@ -20,6 +20,12 @@ $result->then(function ($res) {
 });
 ```
 
+### Install
+
+```
+composer require exan/reactphp-retrier
+```
+
 # Supported PHP versions
 - 8.1
 - 8.2
