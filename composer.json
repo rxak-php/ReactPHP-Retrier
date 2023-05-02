@@ -1,0 +1,44 @@
+{
+    "name": "exan/reactphp-retrier",
+    "description": "Simple way to retry reactPHP promises several times",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Exan\\Retrier\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Exan\\Retrier\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Exanlv",
+            "email": "exan@landviz.nl"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "mockery/mockery": "dev-master",
+        "squizlabs/php_codesniffer": "^3.7",
+        "phpmd/phpmd": "^2.13",
+        "react/async": "^4.0"
+    },
+    "scripts": {
+        "md": "phpmd src text ruleset.xml",
+
+        "cs": "phpcs --standard=PSR12 src tests",
+        "csf": "phpcbf --standard=PSR12 src tests",
+
+        "phpunit": "phpunit",
+        "phpunit-coverage": "@php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html",
+
+        "test": "composer phpunit",
+        "test-coverage": "composer phpunit-coverage"
+    },
+    "require": {
+        "react/promise": "^2.10.0"
+    }
+}
