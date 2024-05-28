@@ -23,8 +23,7 @@
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.7",
         "phpmd/phpmd": "^2.13",
-        "react/async": "^4.0",
-        "mockery/mockery": "^1.6"
+        "react/async": "^4.0"
     },
     "scripts": {
         "md": "phpmd src text ruleset.xml",

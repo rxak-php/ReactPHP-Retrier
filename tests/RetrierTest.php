@@ -7,14 +7,13 @@ namespace Tests\Exan\Retrier;
 use Exan\Retrier\Exceptions\TooManyRetriesException;
 use Exan\Retrier\Retrier;
 use Exception;
-use Mockery\Adapter\Phpunit\MockeryTestCase;
-use React\Promise\ExtendedPromiseInterface;
+use PHPUnit\Framework\TestCase;
 use React\Promise\Promise;
 use React\Promise\PromiseInterface;
 
 use function React\Async\await;
 
-class RetrierTest extends MockeryTestCase
+class RetrierTest extends TestCase
 {
     private function getResolvedPromise(mixed $result = null): PromiseInterface
     {
