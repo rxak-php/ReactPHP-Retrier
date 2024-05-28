@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Exan\Retrier;
 
 use Exan\Retrier\Exceptions\TooManyRetriesException;
-use React\Promise\ExtendedPromiseInterface;
 use React\Promise\Promise;
+use React\Promise\PromiseInterface;
 
 class Retrier
 {
     public function retry(
         int $attempts,
         callable $action
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return new Promise(static function (callable $resolve, callable $reject) use ($attempts, $action) {
             $retries = 0;
             $shouldReject = static function () use (&$retries, $attempts) {
