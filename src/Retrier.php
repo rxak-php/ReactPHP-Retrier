@@ -10,7 +10,7 @@ use React\Promise\PromiseInterface;
 
 class Retrier
 {
-    public function retry(
+    public static function retry(
         int      $attempts,
         callable $action
     ): PromiseInterface
