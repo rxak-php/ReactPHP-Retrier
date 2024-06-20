@@ -11,9 +11,10 @@ use React\Promise\PromiseInterface;
 class Retrier
 {
     public function retry(
-        int $attempts,
+        int      $attempts,
         callable $action
-    ): PromiseInterface {
+    ): PromiseInterface
+    {
         return new Promise(static function (callable $resolve, callable $reject) use ($attempts, $action) {
             $retries = 0;
             $shouldReject = static function () use (&$retries, $attempts) {
@@ -31,8 +32,8 @@ class Retrier
             ) {
                 $action($retries)
                     ->then($resolve)
-                    ->otherwise(static fn () => $shouldReject()
-                        ? $reject(new TooManyRetriesException())
+                    ->catch(static fn(\Throwable $e) => $shouldReject()
+                        ? $reject(new TooManyRetriesException(sprintf('Too many retries of #%d for exception: %s', $retries, $e->getMessage()), $e->getCode(), $e)) //TODO: maybe pass an array of occurred exceptions and not just the last one
                         : $executeAction($action));
             };
 
