@@ -11,7 +11,8 @@ use Throwable;
 
 class Retrier
 {
-    public static function attempt(int $attempts, callable $action): PromiseInterface {
+    public static function attempt(int $attempts, callable $action): PromiseInterface
+    {
         return new Promise(static function (callable $resolve, callable $reject) use ($attempts, $action) {
             $exceptions = [];
             $retries = 0;
