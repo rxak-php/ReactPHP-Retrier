@@ -7,16 +7,17 @@ namespace Exan\Retrier;
 use Exan\Retrier\Exceptions\TooManyRetriesException;
 use React\Promise\Promise;
 use React\Promise\PromiseInterface;
+use Throwable;
 
 class Retrier
 {
-    public function retry(
-        int $attempts,
-        callable $action
-    ): PromiseInterface {
+    public static function attempt(int $attempts, callable $action): PromiseInterface
+    {
         return new Promise(static function (callable $resolve, callable $reject) use ($attempts, $action) {
+            $exceptions = [];
             $retries = 0;
-            $shouldReject = static function () use (&$retries, $attempts) {
+            $shouldReject = static function (Throwable $e) use (&$retries, &$exceptions, $attempts) {
+                $exceptions[] = $e;
                 return ++$retries >= $attempts;
             };
 
@@ -27,16 +28,25 @@ class Retrier
                 $resolve,
                 $shouldReject,
                 $reject,
-                &$executeAction
+                &$executeAction,
+                &$exceptions
             ) {
                 $action($retries)
                     ->then($resolve)
-                    ->otherwise(static fn () => $shouldReject()
-                        ? $reject(new TooManyRetriesException())
+                    ->otherwise(static fn(\Throwable $e) => $shouldReject($e)
+                        ? $reject(new TooManyRetriesException(
+                            sprintf('Max attempts of %d reached', $retries),
+                            exceptions: $exceptions,
+                        ))
                         : $executeAction($action));
             };
 
             $executeAction($action);
         });
+    }
+
+    public function retry(int $attempts, callable $action): PromiseInterface
+    {
+        return self::attempt($attempts, $action);
     }
 }
