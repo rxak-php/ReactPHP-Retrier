@@ -20,6 +20,22 @@ $result->then(function ($res) {
 });
 ```
 
+Or static:
+
+```php
+use Exan\Retrier\Retrier;
+
+$result = Retrier::attempt(3, fn () => new Promise(function ($resolve, $reject) {
+    // This will be executed up to 3 times
+
+    $resolve('Success!');
+}));
+
+$result->then(function ($res) {
+    echo $res; // 'Success!'
+});
+```
+
 ### Install
 
 ```
