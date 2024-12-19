@@ -33,7 +33,7 @@ class Retrier
             ) {
                 $action($retries)
                     ->then($resolve)
-                    ->otherwise(static fn(\Throwable $e) => $shouldReject($e)
+                    ->catch(static fn(\Throwable $e) => $shouldReject($e)
                         ? $reject(new TooManyRetriesException(
                             sprintf('Max attempts of %d reached', $retries),
                             exceptions: $exceptions,
