@@ -39,6 +39,7 @@
         "test-coverage": "composer phpunit-coverage"
     },
     "require": {
-        "react/promise": "^3.0 || ^2.10.0"
+        "php": "^8.1",
+        "react/promise": "^3.0"
     }
 }
