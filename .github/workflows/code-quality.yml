@@ -7,7 +7,7 @@ on:
 
 jobs:
   cs:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Install PHP 8.1
@@ -20,7 +20,7 @@ jobs:
       run: composer cs
 
   phpmd:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Install PHP 8.1
@@ -33,7 +33,7 @@ jobs:
       run: composer md
 
   util-checks:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Install PHP 8.1
